@@ -6,7 +6,7 @@ import PaginaErro from "./pages/PaginaErro";
 
 import "./App.css";
 
-function App() {
+export default function App() {
   const [carrinho, setCarrinho] = useState([]);
   const [quantidadeProdutos, setQuantidadeProdutos] = useState(0);
   const [valorTotalCarrinho, setValorTotalCarrinho] = useState(0);
@@ -99,5 +99,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;
