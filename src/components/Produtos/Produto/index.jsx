@@ -2,15 +2,7 @@ import React from "react";
 import Botao from "@/components/Botao";
 import { formatadorMoeda } from "@/utils/formatadorMoeda";
 
-const Produto = ({
-  src,
-  id,
-  alt,
-  titulo,
-  descricao,
-  preco,
-  adicionarProduto,
-}) => {
+export default function Produto({ src, id, alt, titulo, descricao, preco, adicionarProduto }) {
   return (
     <div className="col-12 col-md-6 col-xxl-4 pb-4">
       <div className="card">
@@ -36,4 +28,3 @@ const Produto = ({
   );
 };
 
-export default Produto;
