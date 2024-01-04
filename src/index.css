@@ -6,8 +6,5 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  padding-top: 4.25rem;
+  -webkit-text-size-adjust: 100%;
 }

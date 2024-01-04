@@ -1,13 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { CarrinhoProvider } from './context/CarrinhoContext'
+import { CarrinhoProvider } from "./context/CarrinhoContext";
 import Home from "./pages/Home";
 import Carrinho from "./pages/Carrinho";
 import PaginaErro from "./pages/PaginaErro";
 
 import "./App.css";
 
-export default function App() {
-
+function App() {
   return (
     <BrowserRouter>
       <CarrinhoProvider>
@@ -20,3 +19,5 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
+export default App;
