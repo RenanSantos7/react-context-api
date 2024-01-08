@@ -5,17 +5,13 @@ import BotaoCarrinho from "./BotaoCarrinho";
 import CampoTexto from "@/components/CampoTexto";
 import Botao from "@/components/Botao";
 
-import styles from './BarraNavegacao.module.css'
-
 import { useLocation } from "react-router-dom";
 
 const BarraNavegacao = ({ quantidadeProdutos }) => {
-
   const location = useLocation();
   const ehAPaginaCarrinho = location.pathname === "/carrinho";
-
   return (
-    <header className={styles.barraNavegacao}>
+    <header>
       <nav className="navbar navbar-expand-md bg-black navbar-dark">
         <div className="container-fluid custom-margin">
           <Logo />
