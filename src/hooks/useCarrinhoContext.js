@@ -21,7 +21,7 @@ export function useCarrinhoContext() {
 			return setCarrinho(carrinhoAnterior => [...carrinhoAnterior, novoProduto])
 		}
 
-		const carrinhoMod = mudarQuantidade(novoProduto, 1)
+		const carrinhoMod = mudarQuantidade(novoProduto.id, 1)
 
 		setCarrinho([...carrinhoMod])
 	}
