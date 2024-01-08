@@ -39,10 +39,16 @@ export function useCarrinhoContext() {
 		setCarrinho(carrinhoMod)
 	}
 
+	function deletarProduto(id) {
+		const carrinhoMod = carrinho.filter(itemDoCarrinho => itemDoCarrinho.id !== id)
+		setCarrinho(carrinhoMod)
+	}
+
 	return {
 		carrinho,
 		setCarrinho,
 		adicionarProduto,
 		removerProduto,
+		deletarProduto
 	}
 }
