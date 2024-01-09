@@ -4,15 +4,18 @@ import Titulo from "@/components/Titulo";
 import Sumario from "@/components/Sumario";
 import ListaProdutosCarrinho from "@/components/ListaProdutosCarrinho";
 import BannerCarrinho from "@/components/BannerCarrinho";
+import { useCarrinhoContext } from "../hooks/useCarrinhoContext";
 
-const Carrinho = ({
-  carrinho,
-  adicionarProduto,
-  removerProduto,
-  removerProdutoCarrinho,
-  valorTotalCarrinho,
-  quantidadeProdutos,
-}) => {
+export default function Carrinho() {
+
+  const {
+    carrinho,
+    valorTotal,
+    quantidade,
+    adicionarProduto,
+    removerProduto,
+    deletarProduto } = useCarrinhoContext()
+
   return (
     <>
       <BarraNavegacao />
@@ -31,12 +34,12 @@ const Carrinho = ({
                 carrinho={carrinho}
                 adicionarProduto={adicionarProduto}
                 removerProduto={removerProduto}
-                removerProdutoCarrinho={removerProdutoCarrinho}
+                removerProdutoCarrinho={deletarProduto}
               />
             </div>
             <Sumario
-              valorTotalCarrinho={valorTotalCarrinho}
-              quantidadeProdutos={quantidadeProdutos}
+              valorTotalCarrinho={valorTotal}
+              quantidadeProdutos={quantidade}
             />
           </div>
         </section>
@@ -44,5 +47,3 @@ const Carrinho = ({
     </>
   );
 };
-
-export default Carrinho;
