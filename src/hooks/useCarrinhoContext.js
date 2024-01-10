@@ -1,12 +1,8 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 import { CarrinhoContext } from '@/context/CarrinhoContext'
 
 export function useCarrinhoContext() {
-	const {
-		carrinho, setCarrinho,
-		quantidade, setQuantidade,
-		valorTotal, setValorTotal
-	} = useContext(CarrinhoContext)
+	const { carrinho, setCarrinho, quantidade, setQuantidade, valorTotal, setValorTotal } = useContext(CarrinhoContext)
 
 	function mudarQuantidade(id, qtd) {
 		return carrinho.map(itemDoCarrinho => {
@@ -31,8 +27,8 @@ export function useCarrinhoContext() {
 	}
 
 	function removerProduto(id) {
-        let carrinhoMod = [...carrinho]
-        let produto = carrinho.find(item => item.id === id)
+		let carrinhoMod = [...carrinho]
+		let produto = carrinho.find(item => item.id === id)
 
 		if (produto.quantidade > 1) {
 			carrinhoMod = mudarQuantidade(id, -1)
@@ -48,20 +44,20 @@ export function useCarrinhoContext() {
 		setCarrinho(carrinhoMod)
 	}
 
-	useEffect(() => {
-		const { totalTemp, quantidadeTemp } = carrinho.reduce(
+	const { totalTemp, quantidadeTemp } = useMemo(() => {
+		return carrinho.reduce(
 			(acumulador, resultante) => ({
 				quantidadeTemp: acumulador.quantidadeTemp + resultante.quantidade,
-				totalTemp: acumulador.totalTemp + resultante.preco * resultante.quantidade
+				totalTemp: acumulador.totalTemp + resultante.preco * resultante.quantidade,
 			}),
-			{
-				quantidadeTemp: 0,
-				totalTemp: 0
-			})
-		
+			{ quantidadeTemp: 0, totalTemp: 0 }
+		)
+	}, [carrinho])
+
+	useEffect(() => {
 		setQuantidade(quantidadeTemp)
 		setValorTotal(totalTemp)
-	}, [carrinho])
+	}, [])
 
 	return {
 		carrinho,
@@ -70,6 +66,6 @@ export function useCarrinhoContext() {
 		quantidade,
 		adicionarProduto,
 		removerProduto,
-		deletarProduto
+		deletarProduto,
 	}
 }

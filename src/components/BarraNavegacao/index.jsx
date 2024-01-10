@@ -6,7 +6,7 @@ import CampoTexto from "@/components/CampoTexto";
 import Botao from "@/components/Botao";
 
 import { useLocation } from "react-router-dom";
-import { useCarrrinhoContext } from "@/hooks/useCarrinhoContext"
+import { useCarrinhoContext } from "@/hooks/useCarrinhoContext"
 
 export default function BarraNavegacao() {
 
