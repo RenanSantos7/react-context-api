@@ -1,18 +1,21 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer, useState } from "react";
+import carrinhoReducer from "../reducers/carrinhoReducer";
 
 export const CarrinhoContext = createContext();
 CarrinhoContext.displayName = "Carrinho"
 
 export const CarrinhoProvider = ({ children }) => {
-  const [carrinho, setCarrinho] = useState([]);
+  const estadoInicial = []
+  const [carrinho, dispatch] = useReducer(carrinhoReducer, estadoInicial);
   const [quantidade, setQuantidade] = useState(0);
   const [valorTotal, setValorTotal] = useState(0);
 
   return (
     <CarrinhoContext.Provider value={{
-      carrinho, setCarrinho,
-      quantidade, setQuantidade,
-      valorTotal, setValorTotal
+      carrinho,
+      dispatch,
+      quantidade,
+      valorTotal
     }}>
       {children}
     </CarrinhoContext.Provider>
