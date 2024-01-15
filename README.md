@@ -33,12 +33,14 @@ Para executar o projeto Meteora em seu ambiente local, siga estas etapas:
 
 2. Baixe o repositório do projeto:
 
-3. Extraia os arquivos para uma pasta de sua preferência.
+```bash
+git clone https://github.com/RenanSantos7/react-context-api.git
+```
 
 4. Navegue até a pasta em questão via terminal (cmd):
 
 ```bash
-cd repo-meteora
+cd react-context-api
 ```
 
 5. Instale as dependências usando o npm:
