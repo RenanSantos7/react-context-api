@@ -4,6 +4,7 @@ import BotaoTogglerMenu from "./BotaoTogglerMenu";
 import BotaoCarrinho from "./BotaoCarrinho";
 import CampoTexto from "@/components/CampoTexto";
 import Botao from "@/components/Botao";
+import styles from './BarraNavegacao.module.css'
 
 import { useLocation } from "react-router-dom";
 import { useCarrinhoContext } from "../../hooks/useCarrinhoContext";
@@ -13,7 +14,7 @@ const BarraNavegacao = () => {
   const ehAPaginaCarrinho = location.pathname === "/carrinho";
   const { quantidade } = useCarrinhoContext();
   return (
-    <header>
+    <header className={styles.pageHeader}>
       <nav className="navbar navbar-expand-md bg-black navbar-dark">
         <div className="container-fluid custom-margin">
           <Logo />
