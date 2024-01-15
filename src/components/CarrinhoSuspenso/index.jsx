@@ -1,10 +1,11 @@
+import React from "react";
 import Botao from "@/components/Botao";
 import ListaProdutosCarrinho from "@/components/ListaProdutosCarrinho";
+import TotalCarrinho from "./TotalCarrinho";
 import Titulo from "@/components/Titulo";
-import TotalCarrinho from './TotalCarrinho'
-import { useCarrinhoContext } from "@/hooks/useCarrinhoContext";
+import { useCarrinhoContext } from "../../hooks/useCarrinhoContext";
 
-export default function CarrinhoSuspenso() {
+const CarrinhoSuspenso = () => {
   const { carrinho, valorTotal } = useCarrinhoContext();
   return (
     <div
@@ -35,3 +36,5 @@ export default function CarrinhoSuspenso() {
     </div>
   );
 };
+
+export default CarrinhoSuspenso;

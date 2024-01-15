@@ -6,16 +6,12 @@ import CampoTexto from "@/components/CampoTexto";
 import Botao from "@/components/Botao";
 
 import { useLocation } from "react-router-dom";
-import { useCarrinhoContext } from "@/hooks/useCarrinhoContext"
+import { useCarrinhoContext } from "../../hooks/useCarrinhoContext";
 
-export default function BarraNavegacao() {
-
+const BarraNavegacao = () => {
   const location = useLocation();
-
   const ehAPaginaCarrinho = location.pathname === "/carrinho";
-
-  const { quantidade } = useCarrinhoContext()
-
+  const { quantidade } = useCarrinhoContext();
   return (
     <header>
       <nav className="navbar navbar-expand-md bg-black navbar-dark">
@@ -40,8 +36,9 @@ export default function BarraNavegacao() {
               <Botao type="submit">Pesquisar</Botao>
             </form>
             <BotaoCarrinho
-              className={`d-none d-md-block ${ehAPaginaCarrinho && "d-md-none"
-                }`}
+              className={`d-none d-md-block ${
+                ehAPaginaCarrinho && "d-md-none"
+              }`}
               quantidadeProdutos={quantidade}
             />
           </div>
@@ -50,3 +47,5 @@ export default function BarraNavegacao() {
     </header>
   );
 };
+
+export default BarraNavegacao;

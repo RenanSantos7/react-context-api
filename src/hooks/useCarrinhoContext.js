@@ -1,71 +1,85 @@
-import { useContext, useEffect, useMemo } from 'react'
-import { CarrinhoContext } from '@/context/CarrinhoContext'
+import { useContext } from "react";
+import { CarrinhoContext } from "@/context/CarrinhoContext";
+import { useEffect } from "react";
 
-export function useCarrinhoContext() {
-	const { carrinho, setCarrinho, quantidade, setQuantidade, valorTotal, setValorTotal } = useContext(CarrinhoContext)
+export const useCarrinhoContext = () => {
+  const {
+    carrinho,
+    setCarrinho,
+    quantidade,
+    setQuantidade,
+    valorTotal,
+    setValorTotal,
+  } = useContext(CarrinhoContext);
 
-	function mudarQuantidade(id, qtd) {
-		return carrinho.map(itemDoCarrinho => {
-			if (itemDoCarrinho.id === id) itemDoCarrinho.quantidade += qtd
-			return itemDoCarrinho
-		})
-	}
+  function mudarQuantidade(id, quantidade) {
+    return carrinho.map((itemDoCarrinho) => {
+      if (itemDoCarrinho.id === id) itemDoCarrinho.quantidade += quantidade;
+      return itemDoCarrinho;
+    });
+  }
 
-	function adicionarProduto(novoProduto) {
-		const temOProduto = carrinho.some(itemDoCarrinho => {
-			return itemDoCarrinho.id === novoProduto.id
-		})
+  function adicionarProduto(novoProduto) {
+    const temOProduto = carrinho.some(
+      (itemDoCarrinho) => itemDoCarrinho.id === novoProduto.id
+    );
 
-		if (!temOProduto) {
-			novoProduto.quantidade = 1
-			return setCarrinho(carrinhoAnterior => [...carrinhoAnterior, novoProduto])
-		}
+    if (!temOProduto) {
+      novoProduto.quantidade = 1;
+      return setCarrinho((carrinhoAnterior) => [
+        ...carrinhoAnterior,
+        novoProduto,
+      ]);
+    }
 
-		const carrinhoMod = mudarQuantidade(novoProduto.id, 1)
+    const carrinhoAtualizado = mudarQuantidade(novoProduto.id, 1);
 
-		setCarrinho([...carrinhoMod])
-	}
+    setCarrinho([...carrinhoAtualizado]);
+  }
 
-	function removerProduto(id) {
-		let carrinhoMod = [...carrinho]
-		let produto = carrinho.find(item => item.id === id)
+  function removerProduto(id) {
+    const produto = carrinho.find((itemDoCarrinho) => itemDoCarrinho.id === id);
+    const ehOUltimo = produto.quantidade === 1;
+    if (ehOUltimo) {
+      return setCarrinho((carrinhoAnterior) =>
+        carrinhoAnterior.filter((itemDoCarrinho) => itemDoCarrinho.id !== id)
+      );
+    }
 
-		if (produto.quantidade > 1) {
-			carrinhoMod = mudarQuantidade(id, -1)
-		} else {
-			carrinhoMod = carrinhoMod.filter(item => item.id !== produto.id)
-		}
+    const carrinhoAtualizado = mudarQuantidade(id, -1);
 
-		setCarrinho(carrinhoMod)
-	}
+    setCarrinho([...carrinhoAtualizado]);
+  }
 
-	function deletarProduto(id) {
-		const carrinhoMod = carrinho.filter(itemDoCarrinho => itemDoCarrinho.id !== id)
-		setCarrinho(carrinhoMod)
-	}
+  function removerProdutoCarrinho(id) {
+    const produto = carrinho.filter(
+      (itemDoCarrinho) => itemDoCarrinho.id !== id
+    );
+    setCarrinho(produto);
+  }
 
-	const { totalTemp, quantidadeTemp } = useMemo(() => {
-		return carrinho.reduce(
-			(acumulador, resultante) => ({
-				quantidadeTemp: acumulador.quantidadeTemp + resultante.quantidade,
-				totalTemp: acumulador.totalTemp + resultante.preco * resultante.quantidade,
-			}),
-			{ quantidadeTemp: 0, totalTemp: 0 }
-		)
-	}, [carrinho])
+  useEffect(() => {
+    const { totalTemp, quantidadeTemp } = carrinho.reduce(
+      (acumulador, produto) => ({
+        quantidadeTemp: acumulador.quantidadeTemp + produto.quantidade,
+        totalTemp: acumulador.totalTemp + produto.preco * produto.quantidade,
+      }),
+      {
+        quantidadeTemp: 0,
+        totalTemp: 0,
+      }
+    );
+    setQuantidade(quantidadeTemp);
+    setValorTotal(totalTemp);
+  }, [carrinho]);
 
-	useEffect(() => {
-		setQuantidade(quantidadeTemp)
-		setValorTotal(totalTemp)
-	}, [])
-
-	return {
-		carrinho,
-		setCarrinho,
-		valorTotal,
-		quantidade,
-		adicionarProduto,
-		removerProduto,
-		deletarProduto,
-	}
-}
+  return {
+    carrinho,
+    setCarrinho,
+    adicionarProduto,
+    removerProduto,
+    removerProdutoCarrinho,
+    valorTotal,
+    quantidade,
+  };
+};
