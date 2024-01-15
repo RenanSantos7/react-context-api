@@ -6,7 +6,7 @@ import PaginaErro from "./pages/PaginaErro";
 
 import "./App.css";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <CarrinhoProvider>
@@ -19,5 +19,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;

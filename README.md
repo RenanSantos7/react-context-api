@@ -1,5 +1,3 @@
-![Meteora](thumbnail.png)
-
 # Meteora - E-commerce de Moda
 
 O Meteora é um projeto de e-commerce em fase de desenvolvimento inicial. Este README fornece informações sobre o projeto, suas funcionalidades e como executá-lo em seu ambiente local.
@@ -25,8 +23,6 @@ O projeto Meteora utiliza as seguintes tecnologias e bibliotecas:
 - `Vite` - Build tool para desenvolvimento rápido
 - `JavaScript` - Linguagem de programação principal
 - `Context API` - Para gerenciamento de estado
-- `useReducer` - Para controle de estado
-- `useMemo` - Para otimização de desempenho
 - `Bootstrap` - Framework de design e componentes
 
 ## 🛠️ Abrir e rodar o projeto
